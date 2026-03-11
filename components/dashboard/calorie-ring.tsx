@@ -1,12 +1,12 @@
 "use client"
 
-export default function CalorieRing(){
+export default function CalorieRing() {
 
   const consumed = 1850
   const goal = 2200
-  const percent = Math.round((consumed/goal)*100)
+  const percent = Math.round((consumed / goal) * 100)
 
-  return(
+  return (
     <div className="border rounded p-6 text-center">
 
       <h2 className="text-lg font-bold mb-4">

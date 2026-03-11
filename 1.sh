@@ -1,3 +1,12 @@
+bash -c '
+set -e
+
+echo "Installing icon library..."
+npm install lucide-react
+
+echo "Creating landing page..."
+
+cat > app/page.tsx << "EOF"
 import Link from "next/link"
 import { BarChart3, Brain, Scan } from "lucide-react"
 
@@ -93,3 +102,12 @@ export default function Home() {
     </main>
   )
 }
+EOF
+
+
+echo ""
+echo "Landing page installed!"
+echo ""
+echo "Restart your server:"
+echo "rm -rf .next && npm run dev"
+'

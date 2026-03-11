@@ -1,8 +1,8 @@
 "use client"
 
-export default function MacroSummary(){
+export default function MacroSummary() {
 
-  return(
+  return (
     <div className="grid grid-cols-3 gap-4">
 
       <div className="border p-4 rounded text-center">

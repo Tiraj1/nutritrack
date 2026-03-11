@@ -3,16 +3,16 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts"
 
 const data = [
-  { day:"Mon", calories:1800 },
-  { day:"Tue", calories:2000 },
-  { day:"Wed", calories:1700 },
-  { day:"Thu", calories:2100 },
-  { day:"Fri", calories:1900 },
+  { day: "Mon", calories: 1800 },
+  { day: "Tue", calories: 2000 },
+  { day: "Wed", calories: 1700 },
+  { day: "Thu", calories: 2100 },
+  { day: "Fri", calories: 1900 },
 ]
 
-export default function CalorieTrendChart(){
+export default function CalorieTrendChart() {
 
-  return(
+  return (
     <div className="border rounded p-6">
 
       <h2 className="font-bold mb-4">
@@ -21,9 +21,9 @@ export default function CalorieTrendChart(){
 
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data}>
-          <XAxis dataKey="day"/>
-          <Tooltip/>
-          <Line dataKey="calories"/>
+          <XAxis dataKey="day" />
+          <Tooltip />
+          <Line dataKey="calories" />
         </LineChart>
       </ResponsiveContainer>
 
