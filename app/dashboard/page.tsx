@@ -1,25 +1,30 @@
 import CalorieRing from "@/components/dashboard/calorie-ring"
-import MacroSummary from "@/components/dashboard/macro-summary"
-import WeeklyMacroChart from "@/components/dashboard/weekly-macro-chart"
-import CalorieTrendChart from "@/components/dashboard/calorie-trend-chart"
+import MacroDonut from "@/components/dashboard/macro-donut"
+import WeeklyCalories from "@/components/dashboard/weekly-calories"
+import Streak from "@/components/dashboard/streak"
 
-export default function DashboardPage() {
+export default function DashboardPage(){
 
-  return (
-    <div className="space-y-8">
+ return(
 
-      <h1 className="text-2xl font-bold">
-        Dashboard
-      </h1>
+  <div className="space-y-8">
 
-      <CalorieRing />
+   <h1 className="text-3xl font-bold">
+    Dashboard
+   </h1>
 
-      <MacroSummary />
+   <div className="grid md:grid-cols-2 gap-6">
 
-      <WeeklyMacroChart />
+    <CalorieRing/>
+    <MacroDonut/>
 
-      <CalorieTrendChart />
+   </div>
 
-    </div>
-  )
+   <WeeklyCalories/>
+
+   <Streak/>
+
+  </div>
+
+ )
 }

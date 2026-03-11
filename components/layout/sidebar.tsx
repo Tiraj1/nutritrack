@@ -1,35 +1,37 @@
 "use client"
 
 import Link from "next/link"
+import { BarChart3, ClipboardList, History, Settings } from "lucide-react"
 
-export default function Sidebar() {
-  return (
-    <aside className="w-64 h-screen border-r p-6 flex flex-col gap-4">
+export default function Sidebar(){
 
-      <h2 className="text-xl font-bold mb-6">
-        NutriTrack
-      </h2>
+ return (
+  <aside className="w-64 h-screen border-r p-6 flex flex-col gap-6">
 
-      <Link href="/dashboard" className="hover:font-semibold">
-        Dashboard
-      </Link>
+   <h2 className="text-xl font-bold">
+    NutriTrack
+   </h2>
 
-      <Link href="/dashboard/log" className="hover:font-semibold">
-        Log Food
-      </Link>
+   <Link href="/dashboard" className="flex gap-2 items-center">
+    <BarChart3 size={18}/>
+    Dashboard
+   </Link>
 
-      <Link href="/dashboard/history" className="hover:font-semibold">
-        History
-      </Link>
+   <Link href="/dashboard/log" className="flex gap-2 items-center">
+    <ClipboardList size={18}/>
+    Log Food
+   </Link>
 
-      <Link href="/dashboard/reports" className="hover:font-semibold">
-        Reports
-      </Link>
+   <Link href="/dashboard/history" className="flex gap-2 items-center">
+    <History size={18}/>
+    History
+   </Link>
 
-      <Link href="/settings" className="hover:font-semibold">
-        Settings
-      </Link>
+   <Link href="/settings" className="flex gap-2 items-center">
+    <Settings size={18}/>
+    Settings
+   </Link>
 
-    </aside>
-  )
+  </aside>
+ )
 }
