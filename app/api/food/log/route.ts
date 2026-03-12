@@ -2,32 +2,34 @@ import { prisma } from "@/lib/prisma"
 
 export async function POST(req: Request) {
 
- const body = await req.json()
+  try {
 
- try {
+    const body = await req.json()
 
-  const log = await prisma.foodLog.create({
-   data:{
-    userId: body.userId ?? "demo-user",
-    foodName: body.foodName,
-    calories: Number(body.calories),
-    protein: Number(body.protein),
-    carbs: Number(body.carbs),
-    fat: Number(body.fat),
-    mealType: body.mealType ?? "meal",
-    date: new Date()
-   }
-  })
+    const log = await prisma.foodLog.create({
+      data: {
+        userId: body.userId || "demo-user",
+        foodName: body.foodName || "Unknown",
+        calories: Number(body.calories) || 0,
+        protein: Number(body.protein) || 0,
+        carbs: Number(body.carbs) || 0,
+        fat: Number(body.fat) || 0,
+        mealType: body.mealType || "meal",
+        date: new Date()
+      }
+    })
 
-  return Response.json(log)
+    return Response.json(log)
 
- } catch(e){
+  } catch (err) {
 
-  return Response.json(
-   {error:"Failed to log food"},
-   {status:500}
-  )
+    console.error(err)
 
- }
+    return Response.json(
+      { error: "Logging failed" },
+      { status: 500 }
+    )
+
+  }
 
 }

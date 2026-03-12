@@ -1,16 +1,13 @@
 import { prisma } from "@/lib/prisma"
 
-export async function GET(req: Request){
+export async function GET() {
 
-  const { searchParams } = new URL(req.url)
-  const userId = searchParams.get("userId")
+ const logs = await prisma.foodLog.findMany({
+  orderBy:{
+   createdAt:"desc"
+  }
+ })
 
-  if(!userId) return Response.json([])
+ return Response.json(logs)
 
-  const logs = await prisma.foodLog.findMany({
-    where:{ userId },
-    orderBy:{ createdAt:"desc" }
-  })
-
-  return Response.json(logs)
 }

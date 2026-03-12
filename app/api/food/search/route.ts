@@ -1,13 +1,18 @@
-import { searchFood } from "@/lib/fatsecret"
+import { prisma } from "@/lib/prisma"
 
-export async function GET(req:Request){
+export async function GET(req: Request) {
 
- const { searchParams } = new URL(req.url)
- const query = searchParams.get("q")
+  const { searchParams } = new URL(req.url)
+  const q = searchParams.get("q") || ""
 
- if(!query) return Response.json([])
+  if (!q) return Response.json([])
 
- const results = await searchFood(query)
+  const foods = await prisma.$queryRaw`
+    SELECT id, name, calories, protein, carbs, fat
+    FROM "Food"
+    WHERE search_vector @@ plainto_tsquery('english', ${q})
+    LIMIT 10
+  `
 
- return Response.json(results)
+  return Response.json(foods)
 }

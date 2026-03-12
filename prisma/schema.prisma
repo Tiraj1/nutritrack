@@ -40,3 +40,17 @@ model FoodLog {
 
   user      User @relation(fields: [userId], references: [id])
 }
+
+model Food {
+
+  id String @id @default(cuid())
+
+  name String
+
+  calories Float
+  protein Float
+  carbs Float
+  fat Float
+
+  createdAt DateTime @default(now())
+}

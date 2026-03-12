@@ -4,47 +4,73 @@ import { useState } from "react"
 
 export default function FoodSearch(){
 
- const [query,setQuery] = useState("")
- const [results,setResults] = useState<any[]>([])
+ const [query,setQuery]=useState("")
+ const [results,setResults]=useState<any[]>([])
 
- async function search(){
+ async function search(q:string){
 
-  const res = await fetch("/api/food/search?q="+query)
+  setQuery(q)
 
-  const data = await res.json()
+  if(!q) return
 
-  setResults(data.foods?.food || [])
+  const res=await fetch("/api/food/search?q="+q)
+
+  const data=await res.json()
+
+  setResults(data)
+
+ }
+
+ async function log(food:any){
+
+  await fetch("/api/food/log",{
+   method:"POST",
+   headers:{ "Content-Type":"application/json" },
+   body:JSON.stringify({
+    userId:"demo-user",
+    foodName:food.name,
+    calories:food.calories,
+    protein:food.protein,
+    carbs:food.carbs,
+    fat:food.fat,
+    mealType:"meal"
+   })
+  })
+
+  alert("Food logged!")
+
  }
 
  return(
+
   <div className="space-y-4">
 
-   <div className="flex gap-2">
-    <input
-     className="border p-2 flex-1"
-     placeholder="Search food..."
-     onChange={e=>setQuery(e.target.value)}
-    />
+   <input
+    className="border p-3 rounded w-full"
+    placeholder="Search food..."
+    onChange={e=>search(e.target.value)}
+   />
 
-    <button
-     onClick={search}
-     className="bg-black text-white px-4"
+   {results.map(food=>(
+    <div
+     key={food.id}
+     className="border p-3 rounded flex justify-between"
     >
-     Search
-    </button>
-   </div>
 
-   <div className="space-y-2">
-    {results.map((food:any)=>(
-     <div
-      key={food.food_id}
-      className="border p-2 rounded"
+     <span>{food.name}</span>
+
+     <button
+      onClick={()=>log(food)}
+      className="text-green-600"
      >
-      {food.food_name}
-     </div>
-    ))}
-   </div>
+      add
+     </button>
+
+    </div>
+   ))}
 
   </div>
+
  )
+
 }
